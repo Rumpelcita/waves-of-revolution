@@ -1,0 +1,197 @@
+setup:
+  backgrounds:
+    bedroom: assets/backgrounds/bedroom.png
+    bathroom: assets/backgrounds/bathroom.png
+    closet: assets/backgrounds/closet.png
+    tv: assets/backgrounds/tv.png
+    radio_bg: assets/backgrounds/radio.png
+  characters:
+    Yiyo:
+      speechColour: "#000"
+      looks:
+        normal: assets/characters/yiyo_normal.png
+        angry: assets/characters/yiyo_angry.png
+        worried: assets/characters/yiyo_worried.png
+        suprised: assets/characters/yiyo_surprised.png
+        blushing: assets/characters/yiyo_blushing.png
+    Mer:
+      speechColour: "#000"
+      looks:
+        normal: assets/characters/mer.png
+    Martin:
+      speechColour: "#000"
+      looks:
+        normal: assets/characters/toalla.png
+    Pablo:
+      speechColour: "#000"
+      looks:
+        normal: assets/characters/pablo.png
+    JuanClaudio:
+      speechColour: "#000"
+      looks:
+        normal: assets/characters/juan_cluadio.png
+  cgs:
+    radio: assets/objects/radio.png
+    btn_up: assets/objects/up.png
+    btn_down: assets/objects/down.png
+    explosives_btn: assets/objects/explosives_button.png
+    infiltration_btn: assets/objects/infiltration_button.png
+    spy_btn: assets/objects/spy_button.png
+    delete_btn: assets/objects/delete.png
+  music:
+    handsomedevil: assets/audio/handsomedevil.WAV
+    lovecats: assets/audio/lovecats.WAV
+    neverhad: assets/audio/neverhadnooneever.WAV
+    nowherefast: assets/audio/nowherefast.WAV
+    please: assets/audio/pleasepleasepleaseletmegetwhatiwant.WAV
+    theboy: assets/audio/theboywiththethorninhisside.WAV
+    charmingman: assets/audio/thischarmingman.WAV
+  sfx:
+    catfight: assets/audio/angry4.wav
+    catwarning: assets/audio/angry6.wav
+    miau: assets/audio/cat2.wav
+    magic: assets/audio/magic.wav
+    throw: assets/audio/throw.wav
+    explosionSound: assets/audio/throw.wav
+    staticSound: assets/audio/static.mp3
+  extra:
+    spritesheets:
+      explosion: assets/effects/explosion.png 450 274
+      static: assets/ambient/static.png 320 256
+
+
+start:
+  - scene: radioScreen
+  #- scene: oldManHouse
+  - show tv: WITH FADE
+  - text: The preparations for the Great Banquet and Celebration that will take
+            place in two days on the premises of the Sociedad Rural are proceeding at full speed.
+  - text: The event will commemorate the 6 months that have passed since the Blessed Day
+            we accepted the Most Bennings from Outer Space as our Leaders and Guides.
+  - text: The Supreme Council of the Seven Planets and their Advisors will be gathered for the Cleansing of the Waters.
+  - text: During the event, beneficial microorganisms will be freed on the city waters to purify it and
+  - text: lead us to a healthier, happier, life.
+  - text: It is expected that people will gather at the gates to welcome this Illustrious and Benevolent Beings.
+  - text: You can hear more on this after the break.
+  - ambient: STATIC
+  - text: If someone is listening, please help!
+  - text: The microorganisms are parasites...
+  - text: There's plenty of evidence...
+  - text: THEY CAN CONTROL YOUR MIND...
+  - text: ... and supress your will ...
+  - text: They will make you docile.
+  - text: PLEASE HELP!!!
+  - show Yiyo: surprised AT RIGHT WITH FADE
+  - Yiyo says: Oh, no!
+  - show Yiyo: angry
+  - Yiyo says: We have to do something!
+  - show Yiyo: worried
+  - Yiyo says: Maybe the old man knows what to do!
+  - hide Yiyo: WITH FADE
+  - ambient: CLEAR
+  - scene: oldManHouse
+
+
+oldManHouse:
+  - show bedroom: WITH FADE
+  - text: You're at the Old Man house. Dude sure is old.
+  - show Martin: normal AT RIGHT WITH FADE
+  - Martin says: What do you want kid?
+  - show Yiyo: normal AT LEFT WITH FADE
+  - Yiyo says: The world is ending! We have to do something!
+  - Martin says: You're kinda late kid. I'm doing somethin' already.
+  - Martin says: Some pals of mine are too.
+  - Martin says: Wanna help?
+  - choice:
+    - Hell yes!:
+      - Martin says: Then you can replace our radio man.
+      - Yiyo says: What happened to him?
+      - Martin says: Old age. Probably.
+      - Martin says: Wanna go check?
+      - hide Yiyo: WITH FADE
+      - Yiyo says: AAAAAAAAHHHHGHHH!!!
+      - show Yiyo: normal AT LEFT WITH FADE
+    - Wait... What? How comes you're doing something?:
+      - Martin says: We have a little rebel operation going on.
+      - Martin says: Nothing fancy.
+      - Martin says: You can mind the radio.
+      - Martin says: It's over there.
+  - Martin says: Using the radio is easy.
+  - jsScript: !!js/function >
+      function() {
+        create_radio();
+        RenJS.resolve();
+      }
+  - Martin says: See the arrows on the lower right?
+  - Martin says: That's the dial.
+  - Martin says: You use it to tune in and listen what the aliens say on the frequency.
+  - Martin says: You can send what you hear to our espionage team.
+  - Martin says: But only if what you hear is juicy.
+  - Martin says: Like private details of the high ranking officers.
+  - Martin says: Their favorite foods, TV shows, who they got the hots for.
+  - Martin says: And so on.
+  - Martin says: Click on the espionage button to send the juicy stuff to them.
+  - Martin says: If what you hear is garbage, you can click the delete button.
+  - Martin says: The team will let you know if you did fine.
+  - Martin says: Good luck, kid!
+  - scene: radioScreen
+
+successLevelOne:
+  - show Pablo: normal AT RIGHT WITH FADE
+  - Pablo says: Thank you, Yiyo.
+  - show Yiyo: normal AT LEFT WITH FADE
+  - Yiyo says: How did it go?
+  - Pablo says: It went.
+  - Yiyo says: You're just the worst!
+  - Pablo says: If I'm just then I can't be the worst.
+  - Yiyo says: Whatever.
+  - scene: TVLevelOne
+
+TVLevelOne:
+  - show tv: WITH FADE
+  - text: The Officially Sanctioned Medical Society determined that the microorganisms
+  - text: in the water are safe for human consumption.
+  - text: Some sources even deem them beneficial for human health.
+  - text: The Officially Sanctioned Medical Society is working with the blessing of
+  - text: our Most Bennings from Outer Space in order to dispell this wave of blatant misinformation.
+  - text: Rest assured that not all of humanity will be punished for the actions of a few.
+  - text: And even those few will not suffer...
+  - text: much.
+  - text: Please, stay tuned for the latest news.
+  - text: Brought to you by Tyrant Corp.
+  - scene: IntroLevelTwo
+
+IntroLevelTwo:
+  - show Yiyo: normal AT RIGHT WITH FADE
+  - Yiyo says: This is getting tough...
+  - show Martin: normal AT RIGHT WITH FADE
+  - Martin says: Hey, kid!
+  - Martin says: You've been doin' a good job.
+  - Martin says: So now you get to pass some info onto the infiltration team.
+  - Martin says: They need to know about the location of the guards.
+  - Martin says: You know the drill.
+  - Martin says: Scan the frequencies, send the juicy stuff to the right team, and...
+  - Martin says: Erase the garbage.
+  - Martin says: Good luck kid!
+  - scene: successLevelTwo
+
+successLevelTwo:
+  - show Yiyo: normal AT RIGHT WITH FADE
+  - show JuanClaudio: normal AT RIGHT WITH FADE
+  - JuanClaudio says: Thanks, awesome job there!
+  - hide JuanClaudio: WITH FADE
+  - show Pablo: normal AT RIGHT WITH FADE
+  - Pablo says: Yeah, I guess it was okay.
+  - Pablo says: I met this cute alien dude and everything.
+  - Yiyo says: Good for you dude.
+  - Yiyo says: Go and fall for the enemy and everything!
+
+TVLevelTwo:
+  - show tv: WITH FADE
+
+radioScreen:
+  - jsScript: !!js/function >
+      function() {
+        create_radio();
+        RenJS.resolve();
+      }
