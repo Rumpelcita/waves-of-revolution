@@ -5,28 +5,34 @@ setup:
     closet: assets/backgrounds/closet.png
     tv: assets/backgrounds/tv.png
     radio_bg: assets/backgrounds/radio.png
+    credit: assets/backgrounds/bg_credits.png
   characters:
-    Yiyo:
+    AgentFlauros:
+      displayName: "Agent Flauros"
       speechColour: "#000"
       looks:
         normal: assets/characters/yiyo_normal.png
         angry: assets/characters/yiyo_angry.png
         worried: assets/characters/yiyo_worried.png
-        suprised: assets/characters/yiyo_surprised.png
+        surprised: assets/characters/yiyo_surprised.png
         blushing: assets/characters/yiyo_blushing.png
     Mer:
+      displayName: "Specialist Von Lasher"
       speechColour: "#000"
       looks:
         normal: assets/characters/mer.png
-    Martin:
+    OldMan:
+      displayName: "The Old Man"
       speechColour: "#000"
       looks:
         normal: assets/characters/toalla.png
     Pablo:
+      displayName: "Agent Quarta"
       speechColour: "#000"
       looks:
         normal: assets/characters/pablo.png
     JuanClaudio:
+      displayName: "Juan Claudio"
       speechColour: "#000"
       looks:
         normal: assets/characters/juan_cluadio.png
@@ -39,131 +45,193 @@ setup:
     spy_btn: assets/objects/spy_button.png
     delete_btn: assets/objects/delete.png
   music:
-    handsomedevil: assets/audio/handsomedevil.WAV
-    lovecats: assets/audio/lovecats.WAV
-    neverhad: assets/audio/neverhadnooneever.WAV
-    nowherefast: assets/audio/nowherefast.WAV
-    please: assets/audio/pleasepleasepleaseletmegetwhatiwant.WAV
-    theboy: assets/audio/theboywiththethorninhisside.WAV
-    charmingman: assets/audio/thischarmingman.WAV
+    rada: assets/audio/radarada.wav
+    bond: assets/audio/bond.mp3
+
   sfx:
-    catfight: assets/audio/angry4.wav
-    catwarning: assets/audio/angry6.wav
-    miau: assets/audio/cat2.wav
-    magic: assets/audio/magic.wav
-    throw: assets/audio/throw.wav
     explosionSound: assets/audio/throw.wav
     staticSound: assets/audio/static.mp3
   extra:
     spritesheets:
       explosion: assets/effects/explosion.png 450 274
       static: assets/ambient/static.png 320 256
+      rain: assets/ambient/rain.png 17 17
+      sakura: assets/ambient/sakura-petals.png 17 26
 
 
 start:
-  - scene: radioScreen
-  #- scene: oldManHouse
   - show tv: WITH FADE
-  - text: The preparations for the Great Banquet and Celebration that will take
+  - play rada: WITH FADE
+  - news: The preparations for the Great Banquet and Celebration that will take
             place in two days on the premises of the Sociedad Rural are proceeding at full speed.
-  - text: The event will commemorate the 6 months that have passed since the Blessed Day
+  - news: The event will commemorate the 6 months that have passed since the Blessed Day
             we accepted the Most Bennings from Outer Space as our Leaders and Guides.
-  - text: The Supreme Council of the Seven Planets and their Advisors will be gathered for the Cleansing of the Waters.
-  - text: During the event, beneficial microorganisms will be freed on the city waters to purify it and
-  - text: lead us to a healthier, happier, life.
-  - text: It is expected that people will gather at the gates to welcome this Illustrious and Benevolent Beings.
-  - text: You can hear more on this after the break.
+  - news: The Supreme Council of the Seven Planets and their Advisors will be gathered for the Cleansing of the Waters.
+  - news: During the event, beneficial microorganisms will be freed on the city waters to purify it and
+  - news: lead us to a healthier, happier, life.
+  - news: It is expected that people will gather at the gates to welcome this Illustrious and Benevolent Beings.
+  - news: You can hear more on this after the break.
   - ambient: STATIC
-  - text: If someone is listening, please help!
-  - text: The microorganisms are parasites...
-  - text: There's plenty of evidence...
-  - text: THEY CAN CONTROL YOUR MIND...
-  - text: ... and supress your will ...
-  - text: They will make you docile.
-  - text: PLEASE HELP!!!
-  - show Yiyo: surprised AT RIGHT WITH FADE
-  - Yiyo says: Oh, no!
-  - show Yiyo: angry
-  - Yiyo says: We have to do something!
-  - show Yiyo: worried
-  - Yiyo says: Maybe the old man knows what to do!
-  - hide Yiyo: WITH FADE
+  - news: If someone is listening, please help!
+  - news: The microorganisms are parasites...
+  - news: There's plenty of evidence...
+  - news: THEY CAN CONTROL YOUR MIND...
+  - news: ... and supress your will ...
+  - news: They will make you docile.
+  - news: PLEASE HELP!!!
+  - show AgentFlauros: surprised AT RIGHT WITH FADE
+  - AgentFlauros says: Oh, no!
+  - show AgentFlauros: angry AT RIGHT
+  - AgentFlauros says: We have to do something!
+  - show AgentFlauros: worried AT RIGHT
+  - AgentFlauros says: Maybe the old man knows what to do!
+  - hide AgentFlauros: WITH FADE
   - ambient: CLEAR
   - scene: oldManHouse
 
 
 oldManHouse:
+  - play bond: WITH FADE
   - show bedroom: WITH FADE
-  - text: You're at the Old Man house. Dude sure is old.
-  - show Martin: normal AT RIGHT WITH FADE
-  - Martin says: What do you want kid?
-  - show Yiyo: normal AT LEFT WITH FADE
-  - Yiyo says: The world is ending! We have to do something!
-  - Martin says: You're kinda late kid. I'm doing somethin' already.
-  - Martin says: Some pals of mine are too.
-  - Martin says: Wanna help?
+  - show AgentFlauros: worried AT LEFT WITH MOVE
+    flipped: true
+  - AgentFlauros says: Mmmm... The door was opened.
+  - show OldMan: normal AT RIGHT WITH FADE
+  - OldMan says: What do you want kid?
+  - show AgentFlauros: surprised AT LEFT WITH FADE
+    flipped: true
+  - AgentFlauros says: The world is ending! We have to do something!
+  - show AgentFlauros: normal AT LEFT WITH FADE
+    flipped: true
+  - OldMan says: You're kinda late kid. I'm doing somethin' already.
+  - OldMan says: Some pals of mine are too.
+  - OldMan says: Wanna help?
+  - show AgentFlauros: angry AT LEFT WITH MOVE
+    flipped: true
   - choice:
     - Hell yes!:
-      - Martin says: Then you can replace our radio man.
-      - Yiyo says: What happened to him?
-      - Martin says: Old age. Probably.
-      - Martin says: Wanna go check?
-      - hide Yiyo: WITH FADE
-      - Yiyo says: AAAAAAAAHHHHGHHH!!!
-      - show Yiyo: normal AT LEFT WITH FADE
-    - Wait... What? How comes you're doing something?:
-      - Martin says: We have a little rebel operation going on.
-      - Martin says: Nothing fancy.
-      - Martin says: You can mind the radio.
-      - Martin says: It's over there.
-  - Martin says: Using the radio is easy.
+      - OldMan says: Then you can replace our radio man.
+      - AgentFlauros says: What happened to him?
+      - OldMan says: Old age. Probably.
+      - OldMan says: Wanna go check?
+      - hide AgentFlauros: WITH FADE
+      - AgentFlauros says: AAAAAAAAHHHHGHHH!!!
+      - show AgentFlauros: surprised AT LEFT WITH FADE
+        flipped: true
+    - What? How?:
+      - OldMan says: We have a little rebel operation going on.
+      - OldMan says: Nothing fancy.
+      - OldMan says: You can man the radio.
+      - OldMan says: It's over there.
+  - OldMan says: Don't you worry about anything. Using the radio is easy.
+  - show AgentFlauros: normal AT LEFT WITH FADE
+    flipped: true
   - jsScript: !!js/function >
       function() {
+        level = 0;
         create_radio();
         RenJS.resolve();
       }
-  - Martin says: See the arrows on the lower right?
-  - Martin says: That's the dial.
-  - Martin says: You use it to tune in and listen what the aliens say on the frequency.
-  - Martin says: You can send what you hear to our espionage team.
-  - Martin says: But only if what you hear is juicy.
-  - Martin says: Like private details of the high ranking officers.
-  - Martin says: Their favorite foods, TV shows, who they got the hots for.
-  - Martin says: And so on.
-  - Martin says: Click on the espionage button to send the juicy stuff to them.
-  - Martin says: If what you hear is garbage, you can click the delete button.
-  - Martin says: The team will let you know if you did fine.
-  - Martin says: Good luck, kid!
-  - scene: radioScreen
+  - OldMan says: See the arrows on the lower right?
+  - OldMan says: That's the dial.
+  - OldMan says: You use it to tune in and listen what the aliens say on the frequency.
+  - OldMan says: You can send what you hear to our infiltration team.
+  - OldMan says: But only if what you hear is useful.
+  - OldMan says: Like guard locations and someone taking a break.
+  - OldMan says: Click on the infiltration button to send the useful stuff to them.
+  - OldMan says: If what you hear is garbage, you can click the delete button.
+  - OldMan says: The team leader will let you know if you did fine.
+  - OldMan says: Good luck, kid!
+  - jsScript: !!js/function >
+      function() {
+        destroy_radio();
+        RenJS.resolve();
+      }
+  - hide OldMan: WITH FADE
+  - scene: levelOne
+
+levelOne:
+  - play bond: WITH FADE
+  - show bedroom: WITH FADE
+  - show AgentFlauros: normal AT LEFT WITH MOVE
+    flipped: true
+  - show JuanClaudio: normal AT RIGHT WITH MOVE
+    flipped: true
+  - JuanClaudio says: Hello, Agent Flauros!
+  - JuanClaudio says: I'm the leader of the infiltration team and I'll be counting on you.
+  - show AgentFlauros: angry AT LEFT WITH MOVE
+    flipped: true
+  - AgentFlauros says: I'll do my best, sir!
+  - hide JuanClaudio: WITH FADE
+  - scene: radioOne
+
+radioOne:
+    - play bond: WITH FADE
+    - show bedroom: WITH FADE
+    - jsScript: !!js/function >
+        function() {
+          level = 1;
+          create_radio();
+          RenJS.resolve();
+        }
+    - wait: 45000
+    - scene: oneDone
+
+oneDone:
+    - play bond: WITH FADE
+    - jsScript: !!js/function >
+        function() {
+          destroy_radio();
+          RenJS.resolve();
+        }
+    - show JuanClaudio: normal AT RIGHT WITH MOVE
+      flipped: true
+    - JuanClaudio says: Thank you, Agent Flauros!
+    - AgentFlauros says: How did it go?
+    - if: ({infiltration_okay} > 4)
+      ISTRUE:
+        - JuanClaudio says: You did great! We're all set!
+        - show AgentFlauros: blushing AT LEFT WITH MOVE
+          flipped: true
+        - hide JuanClaudio: WITH FADE
+        - hide AgentFlauros: WITH FADE
+        - scene: TVWin
+      ISFALSE:
+        - JuanClaudio says: It was pretty bad. I'm not sure we can recover.
+        - show AgentFlauros: worried AT LEFT WITH MOVE
+          flipped: true
+        - hide JuanClaudio: WITH FADE
+        - hide AgentFlauros: WITH FADE
+        - scene: TVLose
 
 successLevelOne:
   - show Pablo: normal AT RIGHT WITH FADE
-  - Pablo says: Thank you, Yiyo.
-  - show Yiyo: normal AT LEFT WITH FADE
-  - Yiyo says: How did it go?
+  - Pablo says: Thank you, AgentFlauros.
+  - show AgentFlauros: normal AT LEFT WITH FADE
+  - AgentFlauros says: How did it go?
   - Pablo says: It went.
-  - Yiyo says: You're just the worst!
+  - AgentFlauros says: You're just the worst!
   - Pablo says: If I'm just then I can't be the worst.
-  - Yiyo says: Whatever.
+  - AgentFlauros says: Whatever.
   - scene: TVLevelOne
 
 TVLevelOne:
   - show tv: WITH FADE
-  - text: The Officially Sanctioned Medical Society determined that the microorganisms
-  - text: in the water are safe for human consumption.
-  - text: Some sources even deem them beneficial for human health.
-  - text: The Officially Sanctioned Medical Society is working with the blessing of
-  - text: our Most Bennings from Outer Space in order to dispell this wave of blatant misinformation.
-  - text: Rest assured that not all of humanity will be punished for the actions of a few.
-  - text: And even those few will not suffer...
-  - text: much.
-  - text: Please, stay tuned for the latest news.
-  - text: Brought to you by Tyrant Corp.
+  - news: The Officially Sanctioned Medical Society determined that the microorganisms
+  - news: in the water are safe for human consumption.
+  - news: Some sources even deem them beneficial for human health.
+  - news: The Officially Sanctioned Medical Society is working with the blessing of
+  - news: our Most Bennings from Outer Space in order to dispell this wave of blatant misinformation.
+  - news: Rest assured that not all of humanity will be punished for the actions of a few.
+  - news: And even those few will not suffer...
+  - news: much.
+  - news: Please, stay tuned for the latest news.
+  - news: Brought to you by Tyrant Corp.
   - scene: IntroLevelTwo
 
 IntroLevelTwo:
-  - show Yiyo: normal AT RIGHT WITH FADE
-  - Yiyo says: This is getting tough...
+  - show AgentFlauros: normal AT RIGHT WITH FADE
+  - AgentFlauros says: This is getting tough...
   - show Martin: normal AT RIGHT WITH FADE
   - Martin says: Hey, kid!
   - Martin says: You've been doin' a good job.
@@ -176,18 +244,50 @@ IntroLevelTwo:
   - scene: successLevelTwo
 
 successLevelTwo:
-  - show Yiyo: normal AT RIGHT WITH FADE
+  - show AgentFlauros: normal AT RIGHT WITH FADE
   - show JuanClaudio: normal AT RIGHT WITH FADE
   - JuanClaudio says: Thanks, awesome job there!
   - hide JuanClaudio: WITH FADE
   - show Pablo: normal AT RIGHT WITH FADE
   - Pablo says: Yeah, I guess it was okay.
   - Pablo says: I met this cute alien dude and everything.
-  - Yiyo says: Good for you dude.
-  - Yiyo says: Go and fall for the enemy and everything!
+  - AgentFlauros says: Good for you dude.
+  - AgentFlauros says: Go and fall for the enemy and everything!
 
 TVLevelTwo:
   - show tv: WITH FADE
+  - ambient: RAIN
+  - news: Our Benning Overlords have neutralized the traitor cell that threatened our chances to find happiness and enlightenment.
+  - news: As a way to celebrate, our Magnanimous Leaders will proceed with the Cleansing of the Waters right away!
+  - news: They hope you drink all the water your flimsy boddies can take as soon as possible.
+  - news: Praise our Overlords!
+
+TVWin:
+  - show tv: WITH FADE
+  - play rada: WITH FADE
+  - effect: EXPLOSION
+  - effect: SHAKE
+  - news: A mysterious group has blown up the Sociedad Rural.
+  - news: The incident seems to have thwarted the Cleansing of the Waters.
+  - news: Which was said to have horrifying side effects. Such as
+  - news: Hair loss, depression, erectile dysfunction, and
+  - news: High susceptibility to mind controlling parasites.
+  - news: Since the Benning Ones in charge of running the earth are all dead, earth is now run by the Temporary Earth Government or TEG for short.
+  - news: If you have been in contact with any Benning One and are suffering from any side effects. Please contact your closest TEG representative.
+  - news: This were the news.
+  - scene: creditScreen
+
+TVLose:
+  - show tv: WITH FADE
+  - play rada: WITH FADE
+  - news: Our Benning Overlords have neutralized the traitor cell that threatened our chances to find happiness and enlightenment.
+  - news: As a way to celebrate, our Magnanimous Leaders will proceed with the Cleansing of the Waters right away!
+  - news: They hope you drink all the water your flimsy boddies can take as soon as possible.
+  - news: Praise our Overlords!
+  - scene: creditScreen
+
+creditScreen:
+  - show credit: WITH FADE
 
 radioScreen:
   - jsScript: !!js/function >

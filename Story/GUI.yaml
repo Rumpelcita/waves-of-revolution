@@ -2,25 +2,15 @@ simpleGUI:
   assets:
     images:
       menuBackground: assets/gui/portada.jpg
-      settingsBackground: assets/gui/SettingsBG.png
-      sliderFull: assets/gui/SliderFull.png
-      sliderEmpty: assets/gui/SliderEmpty.png
       textBox: assets/gui/Textbox.png
       nameBox: assets/gui/NameBox.png
       newsBox: assets/gui/bg_newscast.png
       ctc: assets/gui/CTC.png
     spritesheets:
-      startButton: assets/gui/StartButton.png 214 54
-      loadButton: assets/gui/LoadButton.png 214 54
-      settingsButton: assets/gui/SettingsButton.png 214 54
-      returnButton: assets/gui/ReturnButton.png 214 54
-      qmAutoButton: assets/gui/AutoQButton.png 101 57
-      qmSkipButton: assets/gui/SkipQButton.png 101 57
-      qmSettingsButton: assets/gui/MenuQButton.png 101 57
-      qmSaveButton: assets/gui/SaveQButton.png 101 57
-      choice: assets/gui/Choice.png 640 96
-    sound:
-      bgm: assets/audio/nowherefast.WAV
+      startButton: assets/gui/StartButton.png 345 61
+      choice: assets/gui/Choice.png 640 107
+    # sound:
+    #   bgm: assets/audio/nowherefast.WAV
   hud:
     message:
       box: textBox 0 297
@@ -43,41 +33,15 @@ simpleGUI:
         boundsAlignV: middle
         fill: "#4d2700"
     news:
-      box: newsBox 0 0
+      box: newsBox 0 428
       text:
-        font: 16pt Prestige Elite Std
-        boundingBox: 25 200 525 30
+        font: 16pt arial
+        boundingBox: 40 68 1280 40
         fill: "#fff"
-    # buttons:
-    #   auto: qmAutoButton 175 550
-    #   skip: qmSkipButton 280 550
-    #   save: qmSaveButton 395 550
-    #   settings: qmSettingsButton 510 550
-    ctc: ctc 525 325
+    ctc: ctc 68 525
   menus:
     main:
       background: menuBackground 0 0
       music: bgm
       buttons:
-        start: startButton 570 40
-    #     load: loadButton 570 100
-    #     settings: settingsButton 570 160
-    # settings:
-    #   background: settingsBackground 0 0
-    #   buttons:
-    #     return: returnButton 72 507
-    #     start: startButton 299 507
-    #     load: loadButton 525 507
-    #   sliders:
-    #     textSpeed:
-    #       full: sliderFull 425 245
-    #       empty: sliderEmpty 425 245
-    #     autoSpeed:
-    #       full: sliderFull 425 395
-    #       empty: sliderEmpty 425 395
-    #     bgmv:
-    #       full: sliderFull 90 245
-    #       empty: sliderEmpty 90 245
-    #     sfxv:
-    #       full: sliderFull 90 395
-    #       empty: sliderEmpty 90 395
+        start: startButton 400 500

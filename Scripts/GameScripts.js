@@ -1,4 +1,5 @@
 frequency = 110;
+level = 0;
 frequencies = {
   110: 0,
   120: 1,
@@ -13,30 +14,44 @@ frequencies = {
   210: 10
 };
 frequency_index = 0;
-RenJS.varsManager.vars.level = 1;
 RenJS.varsManager.vars.spy_okay = 0;
 RenJS.varsManager.vars.infiltration_okay = 0;
 RenJS.varsManager.vars.explosives_okay = 0;
-RenJS.varsManager.vars.spy = true;
-RenJS.varsManager.vars.infiltration = false;
+RenJS.varsManager.vars.spy = false;
+RenJS.varsManager.vars.infiltration = true;
 RenJS.varsManager.vars.explosives = false;
 
 
 levels = {
+  0 : [
+    {"text": "Send to infiltration.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Send to infiltration.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false},
+    {"text": "Nothing is up.", "team": 0, "used": false}
+  ],
   1 : [
-    {"text": "pip 1", "team": 1, "used": false},
-    {"text": "pip 2", "team": 0, "used": false},
-    {"text": "pip 3", "team": 1, "used": false},
-    {"text": "pip 4", "team": 1, "used": false},
-    {"text": "pip 5", "team": 0, "used": false},
-    {"text": "pip 6", "team": 0, "used": false},
-    {"text": "pip 7", "team": 1, "used": false},
-    {"text": "pip 8", "team": 0, "used": false},
-    {"text": "pip 9", "team": 1, "used": false},
-    {"text": "pip 10", "team": 1, "used": false},
-    {"text": "pip 11", "team": 0, "used": false},
-    {"text": "pip 12", "team": 0, "used": false},
-    {"text": "pip 13", "team": 0, "used": false}
+    {"text": "Guard, please move two rooms north!", "team": 2, "used": false},
+    {"text": "I'm getting sleepy.", "team": 2, "used": false},
+    {"text": "I sure love pizza.", "team": 1, "used": false},
+    {"text": "Do humans dream of electric sheep?", "team": 0, "used": false},
+    {"text": "Guard, please move one room south!", "team": 2, "used": false},
+    {"text": "I'm gonna make some Bacoooon Paaaancakes!", "team": 0, "used": false},
+    {"text": "I'm taking a bathroom break.", "team": 2, "used": false},
+    {"text": "I miss my spiders from Mars.", "team": 0, "used": false},
+    {"text": "I hope I can skip the company's dinner", "team": 0, "used": false},
+    {"text": "Ten more minutes until I'm done with my shift", "team": 2, "used": false},
+    {"text": "Guard, please move two rooms west!", "team": 2, "used": false},
+    {"text": "It sure is cloudy.", "team": 0, "used": false},
+    {"text": "I hope we can harvest this planet soon.", "team": 0, "used": false}
   ]
 }
 
@@ -48,7 +63,7 @@ function create_radio(){
         align: "center"
     });
     frequency_text = game.add.text(54, 262, "", {
-        font: "32px Arial",
+        font: "16px Arial",
         fill: "#c3ff00",
         align: "center"
     });
@@ -79,7 +94,6 @@ function dial_up(){
         frequency+= 10;
         frequency_display.setText(frequency);
         frequency_index = frequencies[frequency];
-        var level = RenJS.varsManager.vars.level;
         if (!levels[level][frequency_index]["used"]){
           frequency_text.setText(levels[level][frequency_index]["text"]);
         } else {
@@ -92,7 +106,6 @@ function dial_down(){
     if (frequency > 110){
         frequency -= 10;
         frequency_index = frequencies[frequency];
-        var level = RenJS.varsManager.vars.level;
         frequency_display.setText(frequency);
         if (!levels[level][frequency_index]["used"]){
           frequency_text.setText(levels[level][frequency_index]["text"]);
@@ -105,7 +118,6 @@ function dial_down(){
 function check_points_del(){
     frequency_item = frequencies[frequency_index];
     used = levels[level][frequency_index]["used"];
-    var level = RenJS.varsManager.vars.level;
     if (!used){
       levels[level][frequency_index]["used"] = true;
       frequency_text.setText("");
@@ -114,7 +126,6 @@ function check_points_del(){
 
 function check_points_spy(){
   frequency_item = frequencies[frequency_index];
-  var level = RenJS.varsManager.vars.level;
   used = levels[level][frequency_index]["used"];
   team = levels[level][frequency_index]["team"];
   if (!used && team == 1){
@@ -130,7 +141,6 @@ function check_points_infiltration(){
   frequency_item = frequencies[frequency_index];
   used = levels[level][frequency_index]["used"];
   team = levels[level][frequency_index]["team"];
-  var level = RenJS.varsManager.vars.level;
   if (!used && team == 2){
     RenJS.varsManager.vars.infiltration_okay ++;
   }
@@ -144,7 +154,6 @@ function check_points_explosives(){
   frequency_item = frequencies[frequency_index];
   used = levels[level][frequency_index]["used"];
   team = levels[level][frequency_index]["team"];
-  var level = RenJS.varsManager.vars.level;
   if (!used && team == 3){
     RenJS.varsManager.vars.explosives_okay ++;
   }

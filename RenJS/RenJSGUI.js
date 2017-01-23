@@ -62,23 +62,31 @@ function SimpleGUI(meta){
         var textStyle = _.extend(config.textDefaults,
             this.elements.hud.message.text,
             {wordWrap:true, wordWrapWidth:textBox.w});
+
         
-        // textStyle.wordWrap = true;
-        // textStyle.wordWrap = true;
-            
-        // };
-        // console.log(textBox);
         this.hud.text = game.add.text(textBox.x,textBox.y, "", textStyle,this.hud.group);
         this.hud.textBox.addChild(this.hud.text);
 
+        //newsbox
+        var newsBox = this.getSpriteInfo(this.elements.hud.news.box);
+        this.hud.newsBox = game.add.image(newsBox.x,newsBox.y,newsBox.key,0,this.hud.group);
+        this.hud.newsBox.visible = false;
+        newsBox = this.getBoundingBoxInfo(this.elements.hud.news.text.boundingBox);
+        var newsStyle = _.extend(config.textDefaults,
+            this.elements.hud.news.text,
+            {wordWrap:true, wordWrapWidth:textBox.w});
+        this.hud.newsText = game.add.text(newsBox.x,newsBox.y, "", newsStyle,this.hud.group);
+        this.hud.newsBox.addChild(this.hud.newsText);
+        //end newsbox
+
         if (this.elements.hud.name){
             var nameBox = this.getSpriteInfo(this.elements.hud.name.box);
-            this.hud.nameBox = game.add.image(nameBox.x,nameBox.y,nameBox.key,0,this.hud.group);            
+            this.hud.nameBox = game.add.image(nameBox.x,nameBox.y,nameBox.key,0,this.hud.group);
             this.hud.nameBox.visible = false;
             this.hud.textBox.addChild(this.hud.nameBox);
             var nameStyle = _.extend(config.textDefaults,this.elements.hud.name.text);
             this.hud.name = game.add.text(0,0, "", nameStyle,this.hud.group);
-            this.hud.name.setTextBounds(0,0, this.hud.nameBox.width, this.hud.nameBox.height);   
+            this.hud.name.setTextBounds(0,0, this.hud.nameBox.width, this.hud.nameBox.height);
             this.hud.nameBox.addChild(this.hud.name);
         }
         if (this.elements.hud.ctc) {
@@ -88,7 +96,7 @@ function SimpleGUI(meta){
             this.hud.ctc.visible = false;
             this.hud.textBox.addChild(this.hud.ctc);
         }
-        this.buttons = this.initButtons(this.elements.hud.buttons,this.hud.group);   
+        this.buttons = this.initButtons(this.elements.hud.buttons,this.hud.group);
     }
 
     this.initMenu = function(name,menu){
@@ -143,9 +151,9 @@ function SimpleGUI(meta){
             RenJS.gui.showMenu("settings");
         },
         return: function(){
-            RenJS.gui.hideMenu();    
+            RenJS.gui.hideMenu();
         }
-        
+
     }
 
     //show menu
@@ -158,38 +166,38 @@ function SimpleGUI(meta){
         if (this.menus[menu].music){
             var music = this.menus[menu].music;
             if (music.ready){
-                music.fadeIn(1000);    
+                music.fadeIn(1000);
             } else {
                setTimeout(function() {
                  music.fadeIn(1000);
-               }, 1000); 
+               }, 1000);
             }
-            
-        };        
+
+        };
     };
 
     //hide menu
-    this.hideMenu = function(menu){  
+    this.hideMenu = function(menu){
         var menu = this.currentMenu;
-        // console.log("hiding "+menu); 
+        // console.log("hiding "+menu);
         var tween = game.add.tween(this.menus[menu].group).to( {alpha:0}, 400);
         tween.onComplete.add(function(){
             this.menus[menu].group.visible = false;
             this.currentMenu = null;
             if (this.previousMenu){
-                this.showMenu(this.previousMenu);   
+                this.showMenu(this.previousMenu);
             }
         },this);
         if (this.menus[menu].music && this.menus[menu].music.ready){
             this.menus[menu].music.fadeOut(400);
-        };   
+        };
         tween.start();
-        
+
     }
 
     //choice and interrupt buttons
     this.showChoices = function(choices){
-        // this.hud.choices.boxes = []; 
+        // this.hud.choices.boxes = [];
         // this.hud.choices = {
         //     key: choiceSprite,
         //     w: dimensions.x,
@@ -213,7 +221,7 @@ function SimpleGUI(meta){
             //chText.anchor.set(0.5,0.5);
             chBox.addChild(chText);
             // debugger;
-            // this.choiceBoxes.push(chBox);            
+            // this.choiceBoxes.push(chBox);
         },this);
     }
 
@@ -232,13 +240,13 @@ function SimpleGUI(meta){
     //dialogue and text
     this.showText = function(text,title,colour,callback){
         // console.log("Showing");
-        if  (title && this.hud.nameBox) {            
+        if  (title && this.hud.nameBox) {
             this.hud.name.clearColors();
-            this.hud.name.addColor(colour,0);  
-            this.hud.nameBox.visible = true; 
+            this.hud.name.addColor(colour,0);
+            this.hud.nameBox.visible = true;
             this.hud.name.text = title;
         } else {
-            this.hud.nameBox.visible = false; 
+            this.hud.nameBox.visible = false;
         }
         // if (this.hud.ctc){
         //     this.hud.ctc.visible = true;
@@ -252,7 +260,7 @@ function SimpleGUI(meta){
                 clearTimeout(loop);
                 RenJS.gui.showCTC();
                 callback();
-            }            
+            }
             textObj.text += (words[count]+" ");
             count++;
         }, config.settings.textSpeed);
@@ -268,6 +276,40 @@ function SimpleGUI(meta){
 
     this.hideText = function(){
         this.hud.textBox.visible = false;
+        if (this.hud.ctc && this.hud.ctc.tween){
+            this.hud.ctc.alpha = 0;
+            this.hud.ctc.tween.stop();
+        }
+    }
+
+
+    //dialogue and text
+    this.showNews = function(text,callback){
+        var textObj = this.hud.newsText
+        textObj.text = "";
+        var words = text.split(" ");
+        var count = 0;
+        var loop = setInterval(function(){
+            if (count >= words.length-1){
+                clearTimeout(loop);
+                RenJS.gui.showCTC();
+                callback();
+            }
+            textObj.text += (words[count]+" ");
+            count++;
+        }, config.settings.textSpeed);
+        // this.hud.group.visible = true;
+        this.hud.newsBox.visible = true;
+        RenJS.storyManager.waitForClick(function(){
+            clearTimeout(loop);
+            textObj.text = text;
+            RenJS.gui.showCTC();
+            callback();
+        });
+    }
+
+    this.hideNews = function(){
+        this.hud.newsBox.visible = false;
         if (this.hud.ctc && this.hud.ctc.tween){
             this.hud.ctc.alpha = 0;
             this.hud.ctc.tween.stop();

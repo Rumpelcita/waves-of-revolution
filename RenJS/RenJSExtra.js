@@ -250,6 +250,7 @@ RenJS.effects = {
     EXPLOSION: function(){
         var explosion = game.add.sprite(game.world.centerX,game.world.centerY, 'explosion');
         explosion.anchor.set(0.5);
+        explosion.scale.set(4.5);
         anim = explosion.animations.add('explode');
         anim.onComplete.add(function(){
             RenJS.resolve();
