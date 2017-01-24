@@ -45,7 +45,7 @@ setup:
     spy_btn: assets/objects/spy_button.png
     delete_btn: assets/objects/delete.png
   music:
-    rada: assets/audio/radarada.wav
+    rada: assets/audio/radarada.ogg
     bond: assets/audio/bond.mp3
 
   sfx:
@@ -61,7 +61,8 @@ setup:
 
 start:
   - show tv: WITH FADE
-  - play rada: WITH FADE
+  - ambient: BGS
+    sfx: rada
   - news: The preparations for the Great Banquet and Celebration that will take
             place in two days on the premises of the Sociedad Rural are proceeding at full speed.
   - news: The event will commemorate the 6 months that have passed since the Blessed Day
@@ -71,6 +72,7 @@ start:
   - news: lead us to a healthier, happier, life.
   - news: It is expected that people will gather at the gates to welcome this Illustrious and Benevolent Beings.
   - news: You can hear more on this after the break.
+  - ambient: CLEAR
   - ambient: STATIC
   - news: If someone is listening, please help!
   - news: The microorganisms are parasites...
@@ -91,7 +93,8 @@ start:
 
 
 oldManHouse:
-  - play bond: WITH FADE
+  - ambient: BGS
+    sfx: bond
   - show bedroom: WITH FADE
   - show AgentFlauros: worried AT LEFT WITH MOVE
     flipped: true
@@ -174,7 +177,7 @@ radioOne:
           create_radio();
           RenJS.resolve();
         }
-    - wait: 45000
+    - wait: 60000
     - scene: oneDone
 
 oneDone:
@@ -195,6 +198,7 @@ oneDone:
           flipped: true
         - hide JuanClaudio: WITH FADE
         - hide AgentFlauros: WITH FADE
+        - ambient: CLEAR
         - scene: TVWin
       ISFALSE:
         - JuanClaudio says: It was pretty bad. I'm not sure we can recover.
@@ -202,6 +206,7 @@ oneDone:
           flipped: true
         - hide JuanClaudio: WITH FADE
         - hide AgentFlauros: WITH FADE
+        - ambient: CLEAR
         - scene: TVLose
 
 successLevelOne:
@@ -256,10 +261,9 @@ successLevelTwo:
 
 TVLevelTwo:
   - show tv: WITH FADE
-  - ambient: RAIN
   - news: Our Benning Overlords have neutralized the traitor cell that threatened our chances to find happiness and enlightenment.
   - news: As a way to celebrate, our Magnanimous Leaders will proceed with the Cleansing of the Waters right away!
-  - news: They hope you drink all the water your flimsy boddies can take as soon as possible.
+  - news: They hope you drink all the water your flimsy bodies can take as soon as possible.
   - news: Praise our Overlords!
 
 TVWin:
@@ -282,7 +286,7 @@ TVLose:
   - play rada: WITH FADE
   - news: Our Benning Overlords have neutralized the traitor cell that threatened our chances to find happiness and enlightenment.
   - news: As a way to celebrate, our Magnanimous Leaders will proceed with the Cleansing of the Waters right away!
-  - news: They hope you drink all the water your flimsy boddies can take as soon as possible.
+  - news: They hope you drink all the water your flimsy bodies can take as soon as possible.
   - news: Praise our Overlords!
   - scene: creditScreen
 

@@ -143,10 +143,12 @@ function check_points_infiltration(){
   team = levels[level][frequency_index]["team"];
   if (!used && team == 2){
     RenJS.varsManager.vars.infiltration_okay ++;
+    frequency_text.setText("=)");
+  } else {
+    frequency_text.setText("=(");
   }
   if (!used){
     levels[level][frequency_index]["used"] = true;
-    frequency_text.setText("");
   }
 }
 
